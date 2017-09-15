@@ -1,0 +1,24 @@
+{
+	"port":"3003",
+	"endpoint":"artists",
+	"files":{
+		"model":"./artist.js",
+		"routes":"./artistRoutes.js",
+		"storageDecorator":"./artistStorageDecorator.js",
+		"requestValidator":"./artistRequestValidator.js"
+	},
+	"storage":{
+		"user":"",
+		"password":"",
+		"host":"localhost",
+		"port":"27017",
+		"database":"catalogue",
+		"collection":"artists"
+	},
+	"security":{
+		"apiKey":false
+	},
+	"dev":{
+		
+	}
+}

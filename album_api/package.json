@@ -1,0 +1,23 @@
+{
+  "name": "catalogue-album-api",
+  "version": "0.0.1",
+  "description": "Catalogue Album API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agorafobico/catalogue-album-api.git"
+  },
+  "author": "agorafobico",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agorafobico/catalogue-album-api/issues"
+  },
+  "homepage": "https://github.com/agorafobico/catalogue-album-api#readme",
+  "dependencies": {
+    "mongodb": "^2.2.29",
+    "restify": "^5.0.0"
+  }
+}

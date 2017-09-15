@@ -1,0 +1,24 @@
+{
+	"port":"3002",
+	"endpoint":"albums",
+	"files":{
+		"model":"./album.js",
+		"routes":"./albumRoutes.js",
+		"storageDecorator":"./albumStorageDecorator.js",
+		"requestValidator":"./albumRequestValidator.js"
+	},
+	"storage":{
+		"user":"",
+		"password":"",
+		"host":"localhost",
+		"port":"27017",
+		"database":"catalogue",
+		"collection":"albums"
+	},
+	"security":{
+		"apiKey":false
+	},
+	"dev":{
+		
+	}
+}

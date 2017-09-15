@@ -1,0 +1,24 @@
+{
+	"port":"3001",
+	"endpoint":"tracks",
+	"files":{
+		"model":"./track.js",
+		"routes":"./trackRoutes.js",
+		"storageDecorator":"./trackStorageDecorator.js",
+		"requestValidator":"./trackRequestValidator.js"
+	},
+	"storage":{
+		"user":"",
+		"password":"",
+		"host":"localhost",
+		"port":"27017",
+		"database":"catalogue",
+		"collection":"tracks"
+	},
+	"security":{
+		"apiKey":false
+	},
+	"dev":{
+		
+	}
+}
