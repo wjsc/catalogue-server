@@ -1,4 +1,4 @@
-# catalogue-album-api
+# catalogue-server
 
 mongo
 use catalogue

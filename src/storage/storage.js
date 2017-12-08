@@ -1,17 +1,12 @@
+const mongo=require('mongodb');
+const config=require('config');
+
 const Storage={
-	init: function(mongo, host, port, database, collection){
-		this.Mongo=mongo;
-		this.host=host;
-		this.port=port;
-		this.database=database;
-		this.collection=collection;
-		return this;
-	},
 	connect: function(){
 		let deferred=Promise.defer();
-		this.Mongo.MongoClient.connect('mongodb://'+this.host+':'+this.port+'/'+this.database, (err, db)=>{
+		mongo.MongoClient.connect('mongodb://'+config.get("storage.host")+':'+config.get("storage.port")+'/'+config.get("storage.database"), (err, db)=>{
 			if(err){
-				console.log(err);
+				console.error(err);
 				deferred.reject(err)
 			}
 			else{
@@ -20,11 +15,11 @@ const Storage={
 		})
 		return deferred.promise;
 	},
-	find: function(obj){
+	find: function(collection, obj){
 		let deferred=Promise.defer();
 		this.connect()
 		.then((db)=>{
-			db.collection(this.collection).find(obj).toArray((err, docs)=>{
+			db.collection(collection).find(obj).toArray((err, docs)=>{
 				db.close();
 				if(err) {
 					deferred.reject(err);
@@ -39,11 +34,11 @@ const Storage={
 		})
 		return deferred.promise;
 	},
-	findOne: function(obj){
+	findOne: function(collection, obj){
 		let deferred=Promise.defer();
 		this.connect()
 		.then((db)=>{
-			db.collection(this.collection).findOne(obj, (err, doc)=>{
+			db.collection(collection).findOne(obj, (err, doc)=>{
 				db.close();
 				if(err) {
 					deferred.reject(err);
@@ -58,11 +53,11 @@ const Storage={
 		})
 		return deferred.promise;
 	},
-	insert: function(obj){
+	insert: function(collection, obj){
 		let deferred=Promise.defer();
 		this.connect()
 		.then((db)=>{
-			db.collection(this.collection).insert(obj, (err, result)=>{
+			db.collection(collection).insert(obj, (err, result)=>{
 				db.close();
 				if(err) {
 					deferred.reject(err);

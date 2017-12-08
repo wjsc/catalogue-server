@@ -1,26 +1,21 @@
-let Track;
-let trackStorageDecorator;
-let apiKey;
+const artistStorageDecorator = require(__dirname + '/../storage/artistStorageDecorator.js');
+const artist = require(__dirname + "/../models/artist.js");
 const defaultHeader={'Content-Type': 'application/json; charset=utf-8'};
 
-const trackRoutes={
-	init: function(endpoint, server, apiKeyExt, trackStorageDecoratorExt, TrackExt, requestTrackValidator){
-		trackStorageDecorator=trackStorageDecoratorExt;
-		Track=TrackExt;
-		apiKey=apiKeyExt;
-
+const artistRoutes={
+	init: function(server, apiKeyExt){
 		server.use(this.authenticate);
-		server.get('/'+endpoint, requestTrackValidator.validateGet, this.handleGet);
-		server.get('/'+endpoint+'/:id', requestTrackValidator.validateGetById, this.handleGetById);
-		server.get('/'+endpoint+'/search/:keyword', requestTrackValidator.validateGetSearch, this.handleGetSearch);
-		server.post('/'+endpoint, requestTrackValidator.validatePost, this.handlePost);
-		server.put('/'+endpoint+'/:id', requestTrackValidator.validatePut, this.handlePut);
-		server.del('/'+endpoint+'/:id', requestTrackValidator.validateDel, this.handleDel);
+		server.get('/artist', this.handleGet);
+		server.get('/artist/:id', this.handleGetById);
+		server.get('/artist/search/:keyword', this.handleGetSearch);
+		server.post('/artist', this.handlePost);
+		server.put('/artist/:id', this.handlePut);
+		server.del('/artist/:id', this.handleDel);
 
 		return this;
 	},
 	authenticate: function(req, res, next){
-		if(!apiKey){
+		if(true || !apiKey){
 			return next();
 		}
 		res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');
@@ -28,7 +23,7 @@ const trackRoutes={
 	    return next(false); 
 	},
 	handleGet: function(req, res, next){
-		trackStorageDecorator.getTracks()
+		artistStorageDecorator.getArtists()
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -41,7 +36,7 @@ const trackRoutes={
 		return next(false);
 	},
 	handleGetById: function(req, res, next){
-		trackStorageDecorator.getTrack(req.params.id)
+		artistStorageDecorator.getArtist(req.params.id)
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -54,7 +49,7 @@ const trackRoutes={
 	  	return next(false);
 	},
 	handleGetSearch: function(req, res, next){
-		trackStorageDecorator.searchTracksByTitle(req.params.keyword)
+		artistStorageDecorator.searchArtistsByName(req.params.keyword)
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -67,14 +62,13 @@ const trackRoutes={
 		return next(false);
 	},
 	handlePost: function(req, res, next){
-		let track = Object.create(Track).setPath(req.body.path)
-										.setTitle(req.body.title)
-										.setDuration(req.body.duration);
+		let artist = Object.create(Artist).setName(req.body.name)
+											.setAlbums(req.body.albums);
 
-		trackStorageDecorator.insertTrack(track)
+		artistStorageDecorator.insertArtist(artist)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(track));
+				res.end(JSON.stringify(artist));
 				return next();
 		})
 		.catch((err)=>{
@@ -85,15 +79,14 @@ const trackRoutes={
 		return next(false);
 	},
 	handlePut: function(req, res, next){
-		let track = Object.create(Track).setId(req.params.id)
-										.setPath(req.body.path)
-										.setTitle(req.body.title)
-										.setDuration(req.body.duration);
+		let artist = Object.create(Artist).setId(req.params.id)
+											.setName(req.body.name)
+											.setAlbums(req.body.albums);
 
-		trackStorageDecorator.updateTrack(track)
+		artistStorageDecorator.updateArtist(artist)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(track));
+				res.end(JSON.stringify(artist));
 				return next();
 		})
 		.catch((err)=>{
@@ -104,12 +97,12 @@ const trackRoutes={
 		return next(false);
 	},
 	handleDel: function(req, res, next){
-		let track = Object.create(Track).setId(req.params.id);
+		let artist = Object.create(Artist).setId(req.params.id);
 
-		trackStorageDecorator.deleteTrack(track)
+		artistStorageDecorator.deleteArtist(artist)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(track));
+				res.end(JSON.stringify(artist));
 				return next();
 		})
 		.catch((err)=>{
@@ -120,4 +113,4 @@ const trackRoutes={
 		return next(false);
 	},
 }
-module.exports=trackRoutes;
+module.exports=artistRoutes;

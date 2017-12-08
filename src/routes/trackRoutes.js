@@ -1,26 +1,21 @@
-let Album;
-let albumStorageDecorator;
-let apiKey;
+const trackStorageDecorator = require(__dirname + '/../storage/trackStorageDecorator.js');
+const track = require(__dirname + "/../models/track.js");
 const defaultHeader={'Content-Type': 'application/json; charset=utf-8'};
 
-const albumRoutes={
-	init: function(endpoint, server, apiKeyExt, albumStorageDecoratorExt, AlbumExt, requestAlbumValidator){
-		albumStorageDecorator=albumStorageDecoratorExt;
-		Album=AlbumExt;
-		apiKey=apiKeyExt;
-
+const trackRoutes={
+	init: function(server, apiKeyExt){
 		server.use(this.authenticate);
-		server.get('/'+endpoint, requestAlbumValidator.validateGet, this.handleGet);
-		server.get('/'+endpoint+'/:id', requestAlbumValidator.validateGetById, this.handleGetById);
-		server.get('/'+endpoint+'/search/:keyword', requestAlbumValidator.validateGetSearch, this.handleGetSearch);
-		server.post('/'+endpoint, requestAlbumValidator.validatePost, this.handlePost);
-		server.put('/'+endpoint+'/:id', requestAlbumValidator.validatePut, this.handlePut);
-		server.del('/'+endpoint+'/:id', requestAlbumValidator.validateDel, this.handleDel);
+		server.get('/track', this.handleGet);
+		server.get('/track/:id', this.handleGetById);
+		server.get('/track/search/:keyword', this.handleGetSearch);
+		server.post('/track', this.handlePost);
+		server.put('/track/:id', this.handlePut);
+		server.del('/track/:id', this.handleDel);
 
 		return this;
 	},
 	authenticate: function(req, res, next){
-		if(!apiKey){
+		if(true || !apiKey){
 			return next();
 		}
 		res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');
@@ -28,7 +23,7 @@ const albumRoutes={
 	    return next(false); 
 	},
 	handleGet: function(req, res, next){
-		albumStorageDecorator.getAlbums()
+		trackStorageDecorator.getTracks()
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -41,7 +36,7 @@ const albumRoutes={
 		return next(false);
 	},
 	handleGetById: function(req, res, next){
-		albumStorageDecorator.getAlbum(req.params.id)
+		trackStorageDecorator.getTrack(req.params.id)
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -54,7 +49,7 @@ const albumRoutes={
 	  	return next(false);
 	},
 	handleGetSearch: function(req, res, next){
-		albumStorageDecorator.searchAlbumsByTitle(req.params.keyword)
+		trackStorageDecorator.searchTracksByTitle(req.params.keyword)
 		.then((result)=>{
 			res.writeHead(200, defaultHeader);
 			res.end(JSON.stringify(result));
@@ -67,15 +62,14 @@ const albumRoutes={
 		return next(false);
 	},
 	handlePost: function(req, res, next){
-		let album = Object.create(Album).setTitle(req.body.title)
-										.setYear(req.body.year)
-										.setCoverPath(req.body.coverPath)
-										.setTracks(req.body.tracks);
+		let track = Object.create(Track).setPath(req.body.path)
+										.setTitle(req.body.title)
+										.setDuration(req.body.duration);
 
-		albumStorageDecorator.insertAlbum(album)
+		trackStorageDecorator.insertTrack(track)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(album));
+				res.end(JSON.stringify(track));
 				return next();
 		})
 		.catch((err)=>{
@@ -86,16 +80,15 @@ const albumRoutes={
 		return next(false);
 	},
 	handlePut: function(req, res, next){
-		let album = Object.create(Album).setId(req.params.id)
+		let track = Object.create(Track).setId(req.params.id)
+										.setPath(req.body.path)
 										.setTitle(req.body.title)
-										.setYear(req.body.year)
-										.setCoverPath(req.body.coverPath)
-										.setTracks(req.body.tracks);
+										.setDuration(req.body.duration);
 
-		albumStorageDecorator.updateAlbum(album)
+		trackStorageDecorator.updateTrack(track)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(album));
+				res.end(JSON.stringify(track));
 				return next();
 		})
 		.catch((err)=>{
@@ -106,12 +99,12 @@ const albumRoutes={
 		return next(false);
 	},
 	handleDel: function(req, res, next){
-		let album = Object.create(Album).setId(req.params.id);
+		let track = Object.create(Track).setId(req.params.id);
 
-		albumStorageDecorator.deleteAlbum(album)
+		trackStorageDecorator.deleteTrack(track)
 		.then((result)=>{
 				res.writeHead(200, defaultHeader);
-				res.end(JSON.stringify(album));
+				res.end(JSON.stringify(track));
 				return next();
 		})
 		.catch((err)=>{
@@ -122,4 +115,4 @@ const albumRoutes={
 		return next(false);
 	},
 }
-module.exports=albumRoutes;
+module.exports=trackRoutes;
