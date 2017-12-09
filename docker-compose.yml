@@ -1,0 +1,11 @@
+api:
+  environment:
+    TZ: "America/Argentina/Buenos_Aires"
+  build: ./docker
+  working_dir: /var/www/catalogue_api
+  ports:
+    - "3001:3001"
+  volumes:
+    - ./:/var/www/catalogue_api:rw
+  command: './docker/entrypoint.sh'
+
