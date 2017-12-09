@@ -6,7 +6,7 @@ const trackStorageDecorator={
 		return storage.find(collection, {});
 	},
 	getTrack: function(id){
-		return storage.findOne(collection, {_id:storage.Mongo.ObjectID(id)});
+		return storage.findOne(collection, {_id:storage.ObjectID(id)});
 	},
 	searchTracksByTitle: function(keyword){
 		return storage.find(collection, { $text: { $search: keyword} });

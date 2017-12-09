@@ -6,7 +6,7 @@ const artistStorageDecorator={
 		return storage.find(collection, {});
 	},
 	getArtist: function(id){
-		return storage.findOne(collection, {_id:storage.Mongo.ObjectID(id)});
+		return storage.findOne(collection, {_id:storage.ObjectID(id)});
 	},
 	searchArtistsByName: function(keyword){
 		return storage.find(collection, { $text: { $search: keyword} });

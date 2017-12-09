@@ -6,7 +6,7 @@ const albumStorageDecorator={
 		return storage.find(collection, {});
 	},
 	getAlbum: function(id){
-		return storage.findOne(collection, {_id:storage.Mongo.ObjectID(id)});
+		return storage.findOne(collection, {_id:storage.ObjectID(id)});
 	},
 	searchAlbumsByTitle: function(keyword){
 		return storage.find(collection, { $text: { $search: keyword} });
