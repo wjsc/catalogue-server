@@ -1,5 +1,5 @@
 const albumStorageDecorator = require(__dirname + '/../storage/albumStorageDecorator.js');
-const album = require(__dirname + "/../models/album.js");
+const Album = require(__dirname + "/../models/album.js");
 const defaultHeader={'Content-Type': 'application/json; charset=utf-8'};
 
 const albumRoutes={
@@ -15,7 +15,7 @@ const albumRoutes={
 		return this;
 	},
 	authenticate: function(req, res, next){
-		if(true || !apiKey){
+		if(true){
 			return next();
 		}
 		res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');

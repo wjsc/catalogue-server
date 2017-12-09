@@ -1,5 +1,6 @@
+
 const trackStorageDecorator = require(__dirname + '/../storage/trackStorageDecorator.js');
-const track = require(__dirname + "/../models/track.js");
+const Track = require(__dirname + "/../models/track.js");
 const defaultHeader={'Content-Type': 'application/json; charset=utf-8'};
 
 const trackRoutes={
@@ -15,7 +16,7 @@ const trackRoutes={
 		return this;
 	},
 	authenticate: function(req, res, next){
-		if(true || !apiKey){
+		if(true){
 			return next();
 		}
 		res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');

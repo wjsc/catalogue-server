@@ -1,5 +1,5 @@
 const artistStorageDecorator = require(__dirname + '/../storage/artistStorageDecorator.js');
-const artist = require(__dirname + "/../models/artist.js");
+const Artist = require(__dirname + "/../models/artist.js");
 const defaultHeader={'Content-Type': 'application/json; charset=utf-8'};
 
 const artistRoutes={
@@ -15,7 +15,7 @@ const artistRoutes={
 		return this;
 	},
 	authenticate: function(req, res, next){
-		if(true || !apiKey){
+		if(true){
 			return next();
 		}
 		res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');
