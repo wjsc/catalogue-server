@@ -19,9 +19,9 @@ const App={
 		server.use(restify.plugins.queryParser());
 		server.use(restify.plugins.bodyParser());
 
-		artistRoutes.init(server, config.get("server.apiKey"));
-		albumRoutes.init(server, config.get("server.apiKey"));
-		trackRoutes.init(server, config.get("server.apiKey"));
+		artistRoutes.init(server);
+		albumRoutes.init(server);
+		trackRoutes.init(server);
 		
 		server.listen(config.get("server.port"), ()=>{
 		 	console.log(server.name, server.url, package.description);
