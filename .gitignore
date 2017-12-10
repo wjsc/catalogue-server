@@ -9,3 +9,5 @@
 
 # Mongo Database
 /data
+
+npm-debug.log*

@@ -5,13 +5,9 @@ const Storage={
 	connect: function(){
 		let deferred=Promise.defer();
 		mongo.MongoClient.connect('mongodb://'+config.get("storage.host")+':'+config.get("storage.port")+'/'+config.get("storage.database"), (err, db)=>{
-			if(err){
-				console.error(err);
-				deferred.reject(err)
-			}
-			else{
-				deferred.resolve(db);
-			}
+			err ? deferred.reject(err)
+				: deferred.resolve(db);
+			
 		})
 		return deferred.promise;
 	},
@@ -24,12 +20,8 @@ const Storage={
 		.then((db)=>{
 			db.collection(collection).find(obj).toArray((err, docs)=>{
 				db.close();
-				if(err) {
-					deferred.reject(err);
-				}
-				else{
-					deferred.resolve(docs);
-				}
+				err ? deferred.reject(err)
+					: deferred.resolve(docs);
 			});
 		})
 		.catch((err)=>{
@@ -43,12 +35,8 @@ const Storage={
 		.then((db)=>{
 			db.collection(collection).findOne(obj, (err, doc)=>{
 				db.close();
-				if(err) {
-					deferred.reject(err);
-				}
-				else{
-					deferred.resolve(doc);
-				}
+				err ? deferred.reject(err)
+				: deferred.resolve(doc);
 			});
 		})
 		.catch((err)=>{
@@ -62,12 +50,9 @@ const Storage={
 		.then((db)=>{
 			db.collection(collection).insert(obj, (err, result)=>{
 				db.close();
-				if(err) {
-					deferred.reject(err);
-				}
-				else{
-					deferred.resolve(result);
-				}
+				err ? deferred.reject(err)
+					: Array.isArray(obj) ? deferred.resolve({ids: result.insertedIds})
+									 	 : deferred.resolve({id: result.insertedIds[0]});
 			})
 		})
 		.catch((err)=>{

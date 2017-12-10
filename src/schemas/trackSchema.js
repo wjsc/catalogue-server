@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const trackSchema = Joi.object().keys({
-	title: Joi.string().alphanum().min(3).required(),
+	title: Joi.string().min(3).required(),
 	duration: Joi.number().integer().min(1).required(),
-	audio: Joi.string().alphanum().required()
+	audio: Joi.string().required()
 });
 
 module.exports = trackSchema;
