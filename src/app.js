@@ -1,5 +1,6 @@
 const fs = require('fs');
 const restify = require('restify');
+const corsMiddleware = require("restify-cors-middleware")
 const config = require('config');
 
 const package = JSON.parse(fs.readFileSync(__dirname + '/../package.json','utf8'));
@@ -19,6 +20,14 @@ const App={
 		server.use(restify.plugins.queryParser());
 		server.use(restify.plugins.bodyParser());
 
+		const cors = corsMiddleware({
+			preflightMaxAge: 5,  
+			origins: config.get("server.origins"),
+			allowHeaders: ["Access-Control-Allow-Origin", "Authorization"]
+		   })
+		
+		server.pre(cors.preflight);
+		server.use(cors.actual);
 		artistRoutes.init(server);
 		albumRoutes.init(server);
 		trackRoutes.init(server);
