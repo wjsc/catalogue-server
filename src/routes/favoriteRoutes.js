@@ -3,7 +3,7 @@ const favoriteService = require(__dirname + '/../services/favoriteService.js');
 const favoriteRoutes={
 	init: function(server){
         server.get('/favorite/user/:user', this.handleGet);
-        server.get('/favorite/:ids', this.handleGetById);
+        server.get('/favorite', this.handleGetById);
 		server.post('/favorite', this.handlePost);
 		server.del('/favorite', this.handleDel);
 		return this;
@@ -12,7 +12,7 @@ const favoriteRoutes={
 		return buildResponse(req, res, next, () => favoriteService.get(req.params.user));
     },
     handleGetById: function(req, res, next){
-		return buildResponse(req, res, next, () => favoriteService.getById(req.body.user, req.params.id));
+		return buildResponse(req, res, next, () => favoriteService.getById(req.query.user, req.query.tracks.split(',')));
 	},
 	handlePost: function(req, res, next){
 		return buildResponse(req, res, next, () => favoriteService.insert(req.body));

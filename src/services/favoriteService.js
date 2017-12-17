@@ -6,8 +6,8 @@ const favoriteService={
     get: function(user){
         return favoriteStorageDecorator.getFavorites(user)
     },
-    getById: function(user, id){
-        return favoriteStorageDecorator.getFavoritesById(user, id)
+    getById: function(user, tracks){
+        return favoriteStorageDecorator.getFavoritesById(user, tracks)
     },
     insert: function(favorite){
         const {error} = Joi.validate(favorite, favoriteSchema);
