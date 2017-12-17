@@ -6,7 +6,7 @@ const trackSchema = Joi.object().keys({
 	artist: mongoIdSchema,
 	album: mongoIdSchema,
 	title: Joi.string().min(3).required(),
-	duration: Joi.number().integer().min(1).required(),
+	duration: Joi.number().min(1).required(),
 	audio: Joi.string().required()
 });
 
