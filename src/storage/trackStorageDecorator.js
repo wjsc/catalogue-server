@@ -5,8 +5,9 @@ const trackStorageDecorator={
 	getTracks: function(){
 		return storage.find(collection, {});
 	},
-	getTrack: function(id){
-		return storage.findOne(collection, {_id: id});
+	getTrack: function(ids){
+		return ids.length > 1 	? storage.find(collection, {_id: {$in: ids} } ) 
+								: storage.findOne(collection, {_id: ids[0] } );
 	},
 	getTracksByAlbum: function(album){
 		return storage.find(collection, {album: album});

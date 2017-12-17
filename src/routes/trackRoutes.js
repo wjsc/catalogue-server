@@ -16,7 +16,7 @@ const trackRoutes={
 		return buildResponse(req, res, next, trackService.get);
 	},
 	handleGetById: function(req, res, next){
-		return buildResponse(req, res, next, () => trackService.getById(req.params.id));
+		return buildResponse(req, res, next, () => trackService.getById(req.params.id.split(',')));
 	},
 	handleGetByAlbum: function(req, res, next){
 		return buildResponse(req, res, next, () => trackService.getByAlbum(req.params.id));

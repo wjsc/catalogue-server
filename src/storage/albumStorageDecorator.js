@@ -5,8 +5,9 @@ const albumStorageDecorator={
 	getAlbums: function(){
 		return storage.find(collection, {});
 	},
-	getAlbum: function(id){
-		return storage.findOne(collection, {_id: id});
+	getAlbum: function(ids){
+		return ids.length > 1 	? storage.find(collection, {_id: {$in: ids} } ) 
+								: storage.findOne(collection, {_id: ids[0] } );
 	},
 	getAlbumsByArtist: function(artist){
 		return storage.find(collection, {artist});

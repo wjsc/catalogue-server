@@ -8,6 +8,7 @@ const package = JSON.parse(fs.readFileSync(__dirname + '/../package.json','utf8'
 const artistRoutes = require(__dirname + "/routes/artistRoutes.js");
 const albumRoutes = require(__dirname + "/routes/albumRoutes.js");
 const trackRoutes = require(__dirname + "/routes/trackRoutes.js");
+const favoriteRoutes = require(__dirname + "/routes/favoriteRoutes.js");
 
 const App={
 	init: function(){
@@ -31,6 +32,7 @@ const App={
 		artistRoutes.init(server);
 		albumRoutes.init(server);
 		trackRoutes.init(server);
+		favoriteRoutes.init(server);
 		
 		server.listen(config.get("server.port"), ()=>{
 		 	console.log(server.name, server.url, package.description);

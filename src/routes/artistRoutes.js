@@ -14,7 +14,7 @@ const artistRoutes={
 		return buildResponse(req, res, next, artistService.get);
 	},
 	handleGetById: function(req, res, next){
-		return buildResponse(req, res, next, () => artistService.getById(req.params.id));
+		return buildResponse(req, res, next, () => artistService.getById(req.params.id.split(',')));
 	},
 	handleGetSearch: function(req, res, next){
 		return buildResponse(req, res, next, () => artistService.search(req.params.keyword));

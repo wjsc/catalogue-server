@@ -1,0 +1,38 @@
+const favoriteService = require(__dirname + '/../services/favoriteService.js');
+
+const favoriteRoutes={
+	init: function(server){
+        server.get('/favorite/user/:user', this.handleGet);
+        server.get('/favorite/:ids', this.handleGetById);
+		server.post('/favorite', this.handlePost);
+		server.del('/favorite', this.handleDel);
+		return this;
+	},
+	handleGet: function(req, res, next){
+		return buildResponse(req, res, next, () => favoriteService.get(req.params.user));
+    },
+    handleGetById: function(req, res, next){
+		return buildResponse(req, res, next, () => favoriteService.getById(req.body.user, req.params.id));
+	},
+	handlePost: function(req, res, next){
+		return buildResponse(req, res, next, () => favoriteService.insert(req.body));
+	},
+	handleDel: function(req, res, next){
+		return buildResponse(req, res, next, () => favoriteService.del(req.body));
+	},
+}
+
+const buildResponse = function (req, res, next, serviceMethod) {
+	serviceMethod()
+	.then((result)=>{
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+		res.end(JSON.stringify(result));
+		return next();
+	})
+	.catch((err)=>{
+		res.writeHead(400, {'Content-Type': 'application/json; charset=utf-8'});
+		res.end(JSON.stringify({ error: err.message}));
+	})
+	return next(false);
+}
+module.exports=favoriteRoutes;

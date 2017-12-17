@@ -15,7 +15,7 @@ const albumRoutes={
 		return buildResponse(req, res, next, albumService.get);
 	},
 	handleGetById: function(req, res, next){
-		return buildResponse(req, res, next, () => albumService.getById(req.params.id));
+		return buildResponse(req, res, next, () => albumService.getById(req.params.id.split(',')));
 	},
 	handleGetByArtist: function(req, res, next){
 		return buildResponse(req, res, next, () => albumService.getByArtist(req.params.id));
