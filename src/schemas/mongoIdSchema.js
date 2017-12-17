@@ -1,5 +1,5 @@
 const Joi = require('joi');
 
-const mongoIdSchema = Joi.string().alphanum().min(24).max(24).required();
+const mongoIdSchema = Joi.string().min(36).max(36).required();
 
 module.exports = mongoIdSchema;

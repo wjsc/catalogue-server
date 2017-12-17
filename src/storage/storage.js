@@ -11,9 +11,6 @@ const Storage={
 		})
 		return deferred.promise;
 	},
-	ObjectID: function(id) {
-		return mongo.ObjectID(id);
-	},
 	find: function(collection, obj){
 		let deferred=Promise.defer();
 		this.connect()

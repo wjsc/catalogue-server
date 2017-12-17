@@ -9,6 +9,12 @@ const trackService={
     getById: function(id){
         return trackStorageDecorator.getTrack(id)
     },
+    getByAlbum: function(album){
+        return trackStorageDecorator.getTracksByAlbum(album)
+    },
+    getByArtist: function(artist){
+        return trackStorageDecorator.getTracksByArtist(artist)
+    },
     search: function(keyword){
         return trackStorageDecorator.searchTracksByName(keyword)
     },

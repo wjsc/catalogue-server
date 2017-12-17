@@ -4,6 +4,7 @@ const albumRoutes={
 	init: function(server){
 		server.get('/album', this.handleGet);
 		server.get('/album/:id', this.handleGetById);
+		server.get('/album/artist/:id', this.handleGetByArtist);
 		server.get('/album/search/:keyword', this.handleGetSearch);
 		server.post('/album', this.handlePost);
 		server.put('/album/:id', this.handlePut);
@@ -15,6 +16,9 @@ const albumRoutes={
 	},
 	handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => albumService.getById(req.params.id));
+	},
+	handleGetByArtist: function(req, res, next){
+		return buildResponse(req, res, next, () => albumService.getByArtist(req.params.id));
 	},
 	handleGetSearch: function(req, res, next){
 		return buildResponse(req, res, next, () => albumService.search(req.params.keyword));

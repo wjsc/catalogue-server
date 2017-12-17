@@ -9,6 +9,9 @@ const albumService={
     getById: function(id){
         return albumStorageDecorator.getAlbum(id)
     },
+    getByArtist: function(artist){
+        return albumStorageDecorator.getAlbumsByArtist(artist)
+    },
     search: function(keyword){
         return albumStorageDecorator.searchAlbumsByName(keyword)
     },

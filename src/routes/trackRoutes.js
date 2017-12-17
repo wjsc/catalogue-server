@@ -4,6 +4,8 @@ const trackRoutes={
 	init: function(server){
 		server.get('/track', this.handleGet);
 		server.get('/track/:id', this.handleGetById);
+		server.get('/track/album/:id', this.handleGetByAlbum);
+		server.get('/track/artist/:id', this.handleGetByArtist);
 		server.get('/track/search/:keyword', this.handleGetSearch);
 		server.post('/track', this.handlePost);
 		server.put('/track/:id', this.handlePut);
@@ -15,6 +17,12 @@ const trackRoutes={
 	},
 	handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => trackService.getById(req.params.id));
+	},
+	handleGetByAlbum: function(req, res, next){
+		return buildResponse(req, res, next, () => trackService.getByAlbum(req.params.id));
+	},
+	handleGetByArtist: function(req, res, next){
+		return buildResponse(req, res, next, () => trackService.getByArtist(req.params.id));
 	},
 	handleGetSearch: function(req, res, next){
 		return buildResponse(req, res, next, () => trackService.search(req.params.keyword));
