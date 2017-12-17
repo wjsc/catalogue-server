@@ -16,7 +16,7 @@ const trackService={
         return trackStorageDecorator.getTracksByArtist(artist)
     },
     search: function(keyword){
-        return trackStorageDecorator.searchTracksByName(keyword)
+        return trackStorageDecorator.searchTracksByTitle(keyword)
     },
     insert: function(track){
         const {error} = Joi.validate(track, trackSchema);

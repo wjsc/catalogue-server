@@ -13,7 +13,7 @@ const albumService={
         return albumStorageDecorator.getAlbumsByArtist(artist)
     },
     search: function(keyword){
-        return albumStorageDecorator.searchAlbumsByName(keyword)
+        return albumStorageDecorator.searchAlbumsByTitle(keyword)
     },
     insert: function(album){
         const {error} = Joi.validate(album, albumSchema);
