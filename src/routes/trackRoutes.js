@@ -1,4 +1,5 @@
 const trackService = require(__dirname + '/../services/trackService.js');
+const config = require('config');
 
 const trackRoutes={
 	init: function(server){
@@ -41,7 +42,8 @@ const trackRoutes={
 const buildResponse = function (req, res, next, serviceMethod) {
 	serviceMethod()
 	.then((result)=>{
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8',
+							'Cache-Control':'max-age='+config.get("server.cacheMaxAge")});
 		res.end(JSON.stringify(result));
 		return next();
 	})

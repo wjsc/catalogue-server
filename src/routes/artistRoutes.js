@@ -1,4 +1,5 @@
 const artistService = require(__dirname + '/../services/artistService.js');
+const config = require('config');
 
 const artistRoutes={
 	init: function(server){
@@ -33,7 +34,8 @@ const artistRoutes={
 const buildResponse = function (req, res, next, serviceMethod) {
 	serviceMethod()
 	.then((result)=>{
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8',
+							'Cache-Control':'max-age='+config.get("server.cacheMaxAge")});
 		res.end(JSON.stringify(result));
 		return next();
 	})

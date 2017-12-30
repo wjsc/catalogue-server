@@ -1,4 +1,5 @@
 const favoriteService = require(__dirname + '/../services/favoriteService.js');
+const config = require('config');
 
 const favoriteRoutes={
 	init: function(server){
@@ -25,7 +26,8 @@ const favoriteRoutes={
 const buildResponse = function (req, res, next, serviceMethod) {
 	serviceMethod()
 	.then((result)=>{
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8',
+							'Cache-Control':'max-age='+config.get("server.cacheMaxAge")});
 		res.end(JSON.stringify(result));
 		return next();
 	})
