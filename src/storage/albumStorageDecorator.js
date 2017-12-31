@@ -10,7 +10,7 @@ const albumStorageDecorator={
 								: storage.findOne(collection, {_id: ids[0] } );
 	},
 	getAlbumsByArtist: function(artist){
-		return storage.find(collection, {artist});
+		return storage.find(collection, {"artist._id": artist});
 	},
 	searchAlbumsByTitle: function(keyword){
 		return storage.find(collection, { $text: { $search: keyword} });
