@@ -27,7 +27,7 @@ const buildResponse = function (req, res, next, serviceMethod) {
 	serviceMethod()
 	.then((result)=>{
 		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8',
-							'Cache-Control':'private, max-age='+config.get("server.cacheMaxAge")});
+							'Cache-Control':'private, max-age=0'});
 		res.end(JSON.stringify(result));
 		return next();
 	})

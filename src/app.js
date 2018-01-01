@@ -9,6 +9,7 @@ const artistRoutes = require(__dirname + "/routes/artistRoutes.js");
 const albumRoutes = require(__dirname + "/routes/albumRoutes.js");
 const trackRoutes = require(__dirname + "/routes/trackRoutes.js");
 const favoriteRoutes = require(__dirname + "/routes/favoriteRoutes.js");
+const historyRoutes = require(__dirname + "/routes/historyRoutes.js");
 
 const App={
 	init: function(){
@@ -33,6 +34,7 @@ const App={
 		albumRoutes.init(server);
 		trackRoutes.init(server);
 		favoriteRoutes.init(server);
+		historyRoutes.init(server);
 		
 		server.listen(config.get("server.port"), ()=>{
 		 	console.log(server.name, server.url, package.description);
