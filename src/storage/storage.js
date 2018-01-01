@@ -56,6 +56,21 @@ const Storage={
 			deferred.reject(err);
 		})
 		return deferred.promise;
+	},
+	delete: function(collection, obj){
+		let deferred=Promise.defer();
+		this.connect()
+		.then((db)=>{
+			db.collection(collection).remove(obj, (err, result)=>{
+				db.close();
+				err ? deferred.reject(err)
+					: deferred.resolve(result);
+			})
+		})
+		.catch((err)=>{
+			deferred.reject(err);
+		})
+		return deferred.promise;
 	}
 }
 module.exports=Storage;

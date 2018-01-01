@@ -12,7 +12,7 @@ const favoriteStorageDecorator={
 		return storage.insert(collection, favorite);
 	},
 	deleteFavorite: function(favorite){
-		return false;
+		return storage.delete(collection, favorite);;
 	}
 }
 module.exports=favoriteStorageDecorator;
