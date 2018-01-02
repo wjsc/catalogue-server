@@ -1,0 +1,15 @@
+{
+	"server":{
+		"port": "PORT",
+		"origins": ["ORIGIN"],
+		"apiKey":["APIKEY"],
+		"cacheMaxAge": "CACHE_MAX_AGE"
+	},
+	"storage":{
+		"user":"DB_USER",
+		"password":"DB_PASSWORD",
+		"host":"DB_HOST",
+		"port":"DB_PORT",
+		"database":"DB"
+	}
+}

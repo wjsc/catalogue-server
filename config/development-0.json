@@ -2,7 +2,7 @@
 	"server":{
 		"port":"3001",
 		"apiKey":false,
-		"cacheMaxAge": 600
+		"cacheMaxAge": 0
 	},
 	"storage":{
 		"user":"",
