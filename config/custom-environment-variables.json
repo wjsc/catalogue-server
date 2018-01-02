@@ -1,8 +1,8 @@
 {
 	"server":{
 		"port": "PORT",
-		"origins": ["ORIGIN"],
-		"apiKey":["APIKEY"],
+		"origin": "ORIGIN",
+		"apiKey":"APIKEY",
 		"cacheMaxAge": "CACHE_MAX_AGE"
 	},
 	"storage":{
