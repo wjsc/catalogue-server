@@ -33,9 +33,9 @@ const Storage={
 			.then( db => {
 				db.collection(collection).insert(obj, (err, result)=>{
 					db.close();
-					err ? deferred.reject(err)
-					: Array.isArray(obj) ? deferred.resolve({ids: result.insertedIds})
-									 	 : deferred.resolve({id: result.insertedIds[0]});
+					err ? reject(err)
+					: Array.isArray(obj) ? resolve({ids: result.insertedIds})
+									 	 : resolve({id: result.insertedIds[0]});
 				});
 			})
 		})
