@@ -3,74 +3,53 @@ const config=require('config');
 
 const Storage={
 	connect: function(){
-		let deferred=Promise.defer();
-		mongo.MongoClient.connect('mongodb://'+config.get("storage.host")+':'+config.get("storage.port")+'/'+config.get("storage.database"), (err, db)=>{
-			err ? deferred.reject(err)
-				: deferred.resolve(db);
-			
-		})
-		return deferred.promise;
+		return mongo.MongoClient.connect('mongodb://'+config.get("storage.host")+':'+config.get("storage.port")+'/'+config.get("storage.database"));
 	},
 	find: function(collection, obj){
-		let deferred=Promise.defer();
-		this.connect()
-		.then((db)=>{
-			db.collection(collection).find(obj).toArray((err, docs)=>{
-				db.close();
-				err ? deferred.reject(err)
-					: deferred.resolve(docs);
-			});
+		return new Promise((resolve, reject) => {
+			this.connect()
+			.then( db => {
+				db.collection(collection).find(obj).toArray((err, docs)=>{
+					db.close();
+					err ? reject(err) : resolve(docs);
+				});
+			})
 		})
-		.catch((err)=>{
-			deferred.reject(err);
-		})
-		return deferred.promise;
 	},
 	findOne: function(collection, obj){
-		let deferred=Promise.defer();
-		this.connect()
-		.then((db)=>{
-			db.collection(collection).findOne(obj, (err, doc)=>{
-				db.close();
-				err ? deferred.reject(err)
-				: deferred.resolve(doc);
-			});
+		return new Promise((resolve, reject) => {
+			this.connect()
+			.then( db => {
+				db.collection(collection).findOne(obj, (err, doc)=>{
+					db.close();
+					err ? reject(err) : resolve(doc);
+				});
+			})
 		})
-		.catch((err)=>{
-			deferred.reject(err);
-		})
-		return deferred.promise;
 	},
 	insert: function(collection, obj){
-		let deferred=Promise.defer();
-		this.connect()
-		.then((db)=>{
-			db.collection(collection).insert(obj, (err, result)=>{
-				db.close();
-				err ? deferred.reject(err)
+		return new Promise((resolve, reject) => {
+			this.connect()
+			.then( db => {
+				db.collection(collection).insert(obj, (err, result)=>{
+					db.close();
+					err ? deferred.reject(err)
 					: Array.isArray(obj) ? deferred.resolve({ids: result.insertedIds})
 									 	 : deferred.resolve({id: result.insertedIds[0]});
+				});
 			})
 		})
-		.catch((err)=>{
-			deferred.reject(err);
-		})
-		return deferred.promise;
 	},
 	delete: function(collection, obj){
-		let deferred=Promise.defer();
-		this.connect()
-		.then((db)=>{
-			db.collection(collection).remove(obj, (err, result)=>{
-				db.close();
-				err ? deferred.reject(err)
-					: deferred.resolve(result);
+		return new Promise((resolve, reject) => {
+			this.connect()
+			.then( db => {
+				db.collection(collection).remove(obj, (err, result)=>{
+					db.close();
+					err ? reject(err) : resolve(result);
+				});
 			})
 		})
-		.catch((err)=>{
-			deferred.reject(err);
-		})
-		return deferred.promise;
 	}
 }
 module.exports=Storage;
