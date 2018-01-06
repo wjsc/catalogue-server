@@ -3,7 +3,7 @@
 		"port":"3001",
 		"origin": "*",
 		"apiKey":false,
-		"cacheMaxAge": 600
+		"cacheMaxAge": 6000
 	},
 	"storage":{
 		"user":"",
