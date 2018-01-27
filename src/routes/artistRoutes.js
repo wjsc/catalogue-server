@@ -12,7 +12,7 @@ const artistRoutes={
 		return this;
 	},
 	handleGet: function(req, res, next){
-		return buildResponse(req, res, next, artistService.get);
+		return buildResponse(req, res, next, () => artistService.get(parseInt(req.query.offset), parseInt(req.query.limit)));
 	},
 	handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => artistService.getById(req.params.id.split(',')));

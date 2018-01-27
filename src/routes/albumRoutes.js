@@ -13,7 +13,7 @@ const albumRoutes={
 		return this;
 	},
 	handleGet: function(req, res, next){
-		return buildResponse(req, res, next, albumService.get);
+		return buildResponse(req, res, next, () => albumService.get(parseInt(req.query.offset), parseInt(req.query.limit)));
 	},
 	handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => albumService.getById(req.params.id.split(',')));

@@ -10,7 +10,7 @@ const favoriteRoutes={
 		return this;
 	},
 	handleGet: function(req, res, next){
-		return buildResponse(req, res, next, () => favoriteService.get(req.params.user));
+		return buildResponse(req, res, next, () => favoriteService.get(req.params.user, parseInt(req.query.offset), parseInt(req.query.limit)));
     },
     handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => favoriteService.getById(req.query.user, req.query.tracks.split(',')));

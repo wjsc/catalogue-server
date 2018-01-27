@@ -3,8 +3,8 @@ const favoriteStorageDecorator = require(__dirname + '/../storage/favoriteStorag
 const favoriteSchema = require(__dirname + "/../schemas/favoriteSchema.js");
 
 const favoriteService={
-    get: function(user){
-        return favoriteStorageDecorator.getFavorites(user)
+    get: function(user, offset, limit){
+        return favoriteStorageDecorator.getFavorites(user, offset, limit)
     },
     getById: function(user, tracks){
         return favoriteStorageDecorator.getFavoritesById(user, tracks)

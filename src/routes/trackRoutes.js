@@ -14,7 +14,7 @@ const trackRoutes={
 		return this;
 	},
 	handleGet: function(req, res, next){
-		return buildResponse(req, res, next, trackService.get);
+		return buildResponse(req, res, next, () => trackService.get(req.query.offset, req.query.limit));
 	},
 	handleGetById: function(req, res, next){
 		return buildResponse(req, res, next, () => trackService.getById(req.params.id.split(',')));

@@ -3,8 +3,8 @@ const trackStorageDecorator = require(__dirname + '/../storage/trackStorageDecor
 const trackSchema = require(__dirname + "/../schemas/trackSchema.js");
 
 const trackService={
-    get: function(){
-        return trackStorageDecorator.getTracks()
+    get: function(offset, limit){
+        return trackStorageDecorator.getTracks(offset, limit)
     },
     getById: function(id){
         return trackStorageDecorator.getTrack(id)

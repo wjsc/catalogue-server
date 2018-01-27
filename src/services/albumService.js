@@ -3,8 +3,8 @@ const albumStorageDecorator = require(__dirname + '/../storage/albumStorageDecor
 const albumSchema = require(__dirname + "/../schemas/albumSchema.js");
 
 const albumService={
-    get: function(){
-        return albumStorageDecorator.getAlbums()
+    get: function(offset, limit){
+        return albumStorageDecorator.getAlbums(offset, limit)
     },
     getById: function(id){
         return albumStorageDecorator.getAlbum(id)

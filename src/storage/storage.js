@@ -5,11 +5,11 @@ const Storage={
 	connect: function(){
 		return mongo.MongoClient.connect('mongodb://'+config.get("storage.host")+':'+config.get("storage.port")+'/'+config.get("storage.database"));
 	},
-	find: function(collection, obj){
+	find: function(collection, obj, offset=0, limit=0, sort = {}){
 		return new Promise((resolve, reject) => {
 			this.connect()
 			.then( db => {
-				db.collection(collection).find(obj).toArray((err, docs)=>{
+				db.collection(collection).find(obj,{skip: offset, limit}).sort(sort).toArray((err, docs)=>{
 					db.close();
 					err ? reject(err) : resolve(docs);
 				});

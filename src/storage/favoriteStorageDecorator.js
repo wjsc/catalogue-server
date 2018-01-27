@@ -2,8 +2,8 @@ const storage = require(__dirname + '/storage.js');
 const collection = 'favorites';
 
 const favoriteStorageDecorator={
-	getFavorites: function(user){
-		return storage.find(collection, {user});
+	getFavorites: function(user, offset, limit){
+		return storage.find(collection, {user}, offset, limit, {_id: -1});
 	},
 	getFavoritesById: function(user, tracks){
 		return storage.find(collection, {user, track: {$in: tracks} } );

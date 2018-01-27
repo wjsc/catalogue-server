@@ -8,7 +8,7 @@ const historyRoutes={
 		return this;
 	},
 	handleGet: function(req, res, next){
-		return buildResponse(req, res, next, () => historyService.get(req.params.user));
+		return buildResponse(req, res, next, () => historyService.get(req.params.user, parseInt(req.query.offset), parseInt(req.query.limit)));
 	},
 	handlePost: function(req, res, next){
 		return buildResponse(req, res, next, () => historyService.insert(req.body));

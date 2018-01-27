@@ -3,8 +3,8 @@ const historyStorageDecorator = require(__dirname + '/../storage/historyStorageD
 const historySchema = require(__dirname + "/../schemas/historySchema.js");
 
 const historyService={
-    get: function(user){
-        return historyStorageDecorator.getHistory(user)
+    get: function(user, offset, limit){
+        return historyStorageDecorator.getHistory(user, offset, limit)
     },
     insert: function(history){
         const {error} = Joi.validate(history, historySchema);

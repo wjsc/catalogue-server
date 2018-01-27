@@ -2,8 +2,8 @@ const storage=require(__dirname + '/storage.js');
 const collection = 'tracks';
 
 const trackStorageDecorator={
-	getTracks: function(){
-		return storage.find(collection, {});
+	getTracks: function(offset, limit){
+		return storage.find(collection, {}, offset, limit);
 	},
 	getTrack: function(ids){
 		return ids.length > 1 	? storage.find(collection, {_id: {$in: ids} } ) 

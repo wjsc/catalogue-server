@@ -2,8 +2,8 @@ const storage = require(__dirname + '/storage.js');
 const collection = 'artists';
 
 const artistStorageDecorator={
-	getArtists: function(){
-		return storage.find(collection, {});
+	getArtists: function(offset, limit){
+		return storage.find(collection, {}, offset, limit);
 	},
 	getArtist: function(ids){
 		return ids.length > 1 	? storage.find(collection, {_id: {$in: ids} } ) 

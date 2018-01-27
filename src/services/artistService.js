@@ -3,8 +3,8 @@ const artistStorageDecorator = require(__dirname + '/../storage/artistStorageDec
 const artistSchema = require(__dirname + "/../schemas/artistSchema.js");
 
 const artistService={
-    get: function(){
-        return artistStorageDecorator.getArtists()
+    get: function(offset, limit){
+        return artistStorageDecorator.getArtists(offset, limit)
     },
     getById: function(id){
         return artistStorageDecorator.getArtist(id)
