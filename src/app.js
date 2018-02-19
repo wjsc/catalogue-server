@@ -24,7 +24,7 @@ const App={
 
 		const cors = corsMiddleware({
 			preflightMaxAge: 5,  
-			origins: [config.get("server.origin")],
+			origins: config.get("server.origin").split(','),
 			allowHeaders: ["Access-Control-Allow-Origin", "Authorization"]
 		   })
 		
