@@ -3,8 +3,8 @@ const config = require('config');
 
 const historyRoutes={
 	init: function(server){
-		server.get('/history/user/:user', this.handleGet);
-		server.post('/history', this.handlePost);
+		server.get('/b/history/user/:user', this.handleGet);
+		server.post('/b/history', this.handlePost);
 		return this;
 	},
 	handleGet: function(req, res, next){

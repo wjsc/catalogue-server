@@ -3,12 +3,12 @@ const config = require('config');
 
 const artistRoutes={
 	init: function(server){
-		server.get('/artist', this.handleGet);
-		server.get('/artist/:id', this.handleGetById);
-		server.get('/artist/search/:keyword', this.handleGetSearch);
-		server.post('/artist', this.handlePost);
-		server.put('/artist/:id', this.handlePut);
-		server.del('/artist/:id', this.handleDel);
+		server.get('/a/artist', this.handleGet);
+		server.get('/a/artist/:id', this.handleGetById);
+		server.get('/a/artist/search/:keyword', this.handleGetSearch);
+		server.post('/a/artist', this.handlePost);
+		server.put('/a/artist/:id', this.handlePut);
+		server.del('/a/artist/:id', this.handleDel);
 		return this;
 	},
 	handleGet: function(req, res, next){

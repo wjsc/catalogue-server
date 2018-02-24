@@ -3,14 +3,14 @@ const config = require('config');
 
 const trackRoutes={
 	init: function(server){
-		server.get('/track', this.handleGet);
-		server.get('/track/:id', this.handleGetById);
-		server.get('/track/album/:id', this.handleGetByAlbum);
-		server.get('/track/artist/:id', this.handleGetByArtist);
-		server.get('/track/search/:keyword', this.handleGetSearch);
-		server.post('/track', this.handlePost);
-		server.put('/track/:id', this.handlePut);
-		server.del('/track/:id', this.handleDel);
+		server.get('/a/track', this.handleGet);
+		server.get('/a/track/:id', this.handleGetById);
+		server.get('/a/track/album/:id', this.handleGetByAlbum);
+		server.get('/a/track/artist/:id', this.handleGetByArtist);
+		server.get('/a/track/search/:keyword', this.handleGetSearch);
+		server.post('/a/track', this.handlePost);
+		server.put('/a/track/:id', this.handlePut);
+		server.del('/a/track/:id', this.handleDel);
 		return this;
 	},
 	handleGet: function(req, res, next){

@@ -3,10 +3,10 @@ const config = require('config');
 
 const favoriteRoutes={
 	init: function(server){
-        server.get('/favorite/user/:user', this.handleGet);
-        server.get('/favorite', this.handleGetById);
-		server.post('/favorite', this.handlePost);
-		server.del('/favorite', this.handleDel);
+        server.get('/b/favorite/user/:user', this.handleGet);
+        server.get('/b/favorite', this.handleGetById);
+		server.post('/b/favorite', this.handlePost);
+		server.del('/b/favorite', this.handleDel);
 		return this;
 	},
 	handleGet: function(req, res, next){

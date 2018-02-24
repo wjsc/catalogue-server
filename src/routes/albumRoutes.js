@@ -3,13 +3,13 @@ const config = require('config');
 
 const albumRoutes={
 	init: function(server){
-		server.get('/album', this.handleGet);
-		server.get('/album/:id', this.handleGetById);
-		server.get('/album/artist/:id', this.handleGetByArtist);
-		server.get('/album/search/:keyword', this.handleGetSearch);
-		server.post('/album', this.handlePost);
-		server.put('/album/:id', this.handlePut);
-		server.del('/album/:id', this.handleDel);
+		server.get('/a/album', this.handleGet);
+		server.get('/a/album/:id', this.handleGetById);
+		server.get('/a/album/artist/:id', this.handleGetByArtist);
+		server.get('/a/album/search/:keyword', this.handleGetSearch);
+		server.post('/a/album', this.handlePost);
+		server.put('/a/album/:id', this.handlePut);
+		server.del('/a/album/:id', this.handleDel);
 		return this;
 	},
 	handleGet: function(req, res, next){
