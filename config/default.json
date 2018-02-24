@@ -1,7 +1,6 @@
 {
 	"server":{
 		"port":"3001",
-		"origin": "*",
 		"apiKey":false,
 		"cacheMaxAge": 6000
 	},

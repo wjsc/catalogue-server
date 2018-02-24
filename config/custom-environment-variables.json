@@ -1,7 +1,6 @@
 {
 	"server":{
 		"port": "PORT",
-		"origin": "ORIGIN",
 		"apiKey":"APIKEY",
 		"cacheMaxAge": "CACHE_MAX_AGE"
 	},
